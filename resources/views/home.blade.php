@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Home</div>
                     <div class="panel-body">
@@ -102,7 +102,7 @@
                                 <tr>
                                     <td>{{ $rating->rating }}</td>
                                     <td>{{ $rating->rating_change }}</td>
-                                    <td>{{ $rating->user->name }}</td>
+                                    <td><a href="/players/{{ $rating->user->id }}">{{ $rating->user->name }}</a></td>
                                     <td>{{ $rating->user->statistics->played_games }}</td>
                                     <td>{{ $rating->user->statistics->games_won }}</td>
                                     <td>{{ $rating->user->statistics->games_lost }}</td>
@@ -130,15 +130,17 @@
                             <tbody>
                             @foreach ($games as $game)
                                 <tr>
-                                    <td>{{ $game->userA->name }}</td>
+                                    <td><a href="/players/{{ $game->userA->id }}">{{ $game->userA->name }}</a></td>
                                     <td>{{ $game->user_a_score }}</td>
-                                    <td>{{ $game->userB->name }}</td>
+                                    <td><a href="/players/{{ $game->userB->id }}">{{ $game->userB->name }}</a></td>
                                     <td>{{ $game->user_b_score }}</td>
                                     <td>{{ $game->created_at }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="panel-footer text-center">
                     </div>
                 </div>
             </div>

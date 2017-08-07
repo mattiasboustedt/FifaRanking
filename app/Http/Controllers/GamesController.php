@@ -12,13 +12,6 @@ class GamesController extends Controller
 {
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -35,7 +28,9 @@ class GamesController extends Controller
      */
     public function index()
     {
-        //
+        $games = Game::all();
+        return view ('games/games', compact('games'));
+
     }
 
     /**

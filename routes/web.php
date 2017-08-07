@@ -23,5 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('statistics', 'StatisticsController');
 Route::resource('games', 'GamesController');
+Route::resource('players', 'PlayersController');
+
 
 //Route::post('/games', 'GamesController@store');

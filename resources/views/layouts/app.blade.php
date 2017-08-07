@@ -12,6 +12,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
 </head>
 <body>
     <div id="app">
@@ -36,7 +42,8 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <li><a href="/games">Games</a></li>
+                        <li><a href="/players">Players</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -53,6 +60,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/players/{{ Auth::user()->id }}">My Profile</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -74,8 +82,5 @@
 
         @yield('content')
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
