@@ -95,11 +95,15 @@ class GamesController extends Controller
         /**
          * Create the game
          */
+        $new_ratings = json_decode($new_ratings, true);
+
         $game = Game::create([
             'user_a_id' => $request['player_one_id'],
             'user_b_id' => $request['player_two_id'],
             'user_a_score' => $request['player_one_score'],
             'user_b_score' => $request['player_two_score'],
+            'user_a_rating_change' => $new_ratings['RatingChangeA'],
+            'user_b_rating_change' => $new_ratings['RatingChangeB'],
         ]);
 
         /**

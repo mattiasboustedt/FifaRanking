@@ -8,7 +8,7 @@ class Game extends Model
 {
 
     protected $fillable = [
-        'user_a_id', 'user_b_id', 'user_a_score', 'user_b_score'
+        'user_a_id', 'user_b_id', 'user_a_score', 'user_b_score', 'user_a_rating_change', 'user_b_rating_change'
     ];
 
     public function userA()

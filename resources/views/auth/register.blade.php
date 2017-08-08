@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1">
                                 <p class="text-muted text-italic text-justify text-center">Are you ready to face
-                                    REALITY? Register below to start using the ELO Rating for FIFA.</p>
+                                    REALITY? Register below to start using the ELO Rating for FIFA. Put your skills to the test.</p>
                                 <br/>
                             </div>
                         </div>

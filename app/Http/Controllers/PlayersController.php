@@ -125,7 +125,8 @@ class PlayersController extends Controller
             $user->save();
         }
 
-        return view('players/profile', compact('user'));
+        return redirect()->action('PlayersController@profile');
+        //return view('players/profile', compact('user'));
     }
 
 }
