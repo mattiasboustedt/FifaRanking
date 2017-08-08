@@ -60,9 +60,13 @@ class PlayersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        var_dump($user);
+        $user_id = $id;
+        $user = User::find($user_id);
+        $games = Game::where('user_a_id', $user->id)->orWhere('user_b_id', $user->id)->get();
+
+        return view('players/details', compact('user', 'games'));
     }
 
     /**
