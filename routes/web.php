@@ -19,7 +19,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/players/profile', 'PlayersController@profile')->name('profile');
+Route::post('/players/profile', 'PlayersController@updateAvatar');
 
 Route::resource('statistics', 'StatisticsController');
 Route::resource('games', 'GamesController');

@@ -54,13 +54,15 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
+
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span> : </span>
-                                    {{ Auth::user()->rating->rating }}
+                                    <img class="text-center img-circle" style="max-height: 32px; max-width:32px; margin-right: 5px"
+                                         src="/uploads/avatars/{{ Auth::user()->avatar }}">
+                                    {{ Auth::user()->name }} <span></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/players/{{ Auth::user()->id }}">My Profile</a></li>
+                                    <li><a href="/players/profile">My Profile</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

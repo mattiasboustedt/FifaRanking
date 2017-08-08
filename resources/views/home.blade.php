@@ -102,7 +102,10 @@
                                 <tr>
                                     <td>{{ $rating->rating }}</td>
                                     <td>{{ $rating->rating_change }}</td>
-                                    <td><a href="/players/{{ $rating->user->id }}">{{ $rating->user->name }}</a></td>
+                                    <td><a href="/players/{{ $rating->user->id }}"> <img class="text-center img-circle"
+                                                                                         style="max-height: 22px; max-width:22px; margin-right: 5px"
+                                                                                         src="/uploads/avatars/{{ $rating->user->avatar }}">{{ $rating->user->name }}
+                                        </a></td>
                                     <td>{{ $rating->user->statistics->played_games }}</td>
                                     <td>{{ $rating->user->statistics->games_won }}</td>
                                     <td>{{ $rating->user->statistics->games_lost }}</td>
@@ -130,9 +133,15 @@
                             <tbody>
                             @foreach ($games as $game)
                                 <tr>
-                                    <td><a href="/players/{{ $game->userA->id }}">{{ $game->userA->name }}</a></td>
+                                    <td><a href="/players/{{ $game->userA->id }}"><img class="text-center img-circle"
+                                                                                       style="max-height: 22px; max-width:22px; margin-right: 5px"
+                                                                                       src="/uploads/avatars/{{ $game->userA->avatar }}">{{ $game->userA->name }}
+                                        </a></td>
                                     <td>{{ $game->user_a_score }}</td>
-                                    <td><a href="/players/{{ $game->userB->id }}">{{ $game->userB->name }}</a></td>
+                                    <td><a href="/players/{{ $game->userB->id }}"><img class="text-center img-circle"
+                                                                                       style="max-height: 22px; max-width:22px; margin-right: 5px"
+                                                                                       src="/uploads/avatars/{{ $game->userB->avatar }}">{{ $game->userB->name }}
+                                        </a></td>
                                     <td>{{ $game->user_b_score }}</td>
                                     <td>{{ $game->created_at }}</td>
                                 </tr>

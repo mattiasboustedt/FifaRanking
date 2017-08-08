@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Image;
+use Symfony\Component\HttpKernel\Client;
 
 class PlayersController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -84,4 +97,27 @@ class PlayersController extends Controller
     {
         //
     }
+
+    public function profile()
+    {
+        $user = Auth::User();
+        return view('players/profile', compact('user'));
+    }
+
+    public function updateAvatar(Request $request)
+    {
+        if($request->hasFile('avatar')) {
+
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(150, 150)->save(public_path('/uploads/avatars/' . $filename));
+
+            $user = Auth::user();
+            $user->avatar = $filename;
+            $user->save();
+        }
+
+        return view('players/profile', compact('user'));
+    }
+
 }

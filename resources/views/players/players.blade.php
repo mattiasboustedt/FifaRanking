@@ -27,7 +27,10 @@
                                 <tr>
                                     <td>{{ $player->rating->rating }}</td>
                                     <td>{{ $player->rating->rating_change }}</td>
-                                    <td><a href="/players/{{ $player->id }}">{{ $player->name }}</a></td>
+                                    <td><a href="/players/{{ $player->id }}"><img class="text-center img-circle"
+                                                                                  style="max-height: 22px; max-width:22px; margin-right: 3px"
+                                                                                  src="/uploads/avatars/{{ $player->avatar }}">{{ $player->name }}
+                                        </a></td>
                                     <td>{{ $player->statistics->played_games }}</td>
                                     <td>{{ $player->statistics->games_won }}</td>
                                     <td>{{ $player->statistics->games_lost }}</td>
@@ -46,7 +49,7 @@
     </div>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('#players_table').DataTable({
                 "order": [0, 'desc']
             });
