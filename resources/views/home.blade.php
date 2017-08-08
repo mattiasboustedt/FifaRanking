@@ -15,7 +15,8 @@
                                 <div class="col-md-6">
                                     <select id="player_one_id" class="form-control" name="player_one_id"
                                             value="{{ old('player_one_id') }}">
-                                        @foreach ($users as $user)
+                                        <option value="" class="text-muted" disabled selected>Player One</option>
+                                    @foreach ($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
@@ -30,7 +31,8 @@
                                 <div class="col-md-6"{{ $errors->has('player_one_id') ? ' has-error' : '' }}>
                                     <select id="player_two_id" class="form-control" name="player_two_id"
                                             value="{{ old('player_two_id') }}">
-                                        @foreach ($users as $user)
+                                        <option value="" class="text-muted" disabled selected>Player Two</option>
+                                    @foreach ($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
@@ -148,8 +150,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    <div class="panel-footer text-center">
                     </div>
                 </div>
             </div>

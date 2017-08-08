@@ -18,6 +18,8 @@
 
                         <hr>
 
+                        <h3>Statistics</h3>
+
                         <table class="table table-striped text-muted" id="profile_table">
                             <thead>
                             <tr>
@@ -48,25 +50,49 @@
                             </tr>
                             </tbody>
                         </table>
-                        <form enctype="multipart/form-data" action="/players/profile" method="POST">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <input class="form-control" type="file" name="avatar" value="Test">
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <button type="submit" class="btn btn-block">
-                                        Upload New Picture
-                                    </button>
-                                </div>
-                            </div>
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        </form>
+                        <hr>
+
+                        <h3>Games</h3>
+
+                        <table class="table table-striped text-muted" id="games_table">
+                            <thead>
+                            <tr>
+                                <th>P1</th>
+                                <th>P1 Score</th>
+                                <th>P2</th>
+                                <th>P2 Score</th>
+                                <th>Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($games as $game)
+                                <tr>
+                                    <td><a href="/players/{{ $game->userA->id }}"><img class="text-center img-circle"
+                                                                                       style="max-height: 22px; max-width:22px; margin-right: 5px"
+                                                                                       src="/uploads/avatars/{{ $game->userA->avatar }}">{{ $game->userA->name }}
+                                        </a></td>
+                                    <td>{{ $game->user_a_score }}</td>
+                                    <td><a href="/players/{{ $game->userB->id }}"><img class="text-center img-circle"
+                                                                                       style="max-height: 22px; max-width:22px; margin-right: 5px"
+                                                                                       src="/uploads/avatars/{{ $game->userB->avatar }}">{{ $game->userB->name }}
+                                        </a></td>
+                                    <td>{{ $game->user_b_score }}</td>
+                                    <td>{{ $game->created_at }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#games_table').DataTable({
+                "order": [[4, "desc"]]
+            });
+        });
+    </script>
 @endsection

@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.head')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3 col-md-offset-2">
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <div class="col-md-4 col-md-offset-4">
+
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="row">
@@ -96,24 +97,12 @@
                             </div>
                         </form>
                     </div>
+                    <div class="panel-footer">
+                        <a href="/login" class="">Login</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-5">
-                <div id="_giphy_tv" class="giphy-tv"></div>
-                <script>
-                    var tags = ['fifa', 'zlatan', 'fifa 17', 'fifa 16'];
-                    var nbr = Math.floor((Math.random() * tags.length));
-                    var _giphy_tv_tag = tags[nbr];
-                    var g = document.createElement('script');
-                    g.type = 'text/javascript';
-                    g.async = true;
-                    g.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'giphy.com/static/js/widgets/tv.js';
-                    var s = document.getElementsByTagName('script')[0];
-                    s.parentNode.insertBefore(g, s);
-                </script>
-                <iframe src="https://embed.spotify.com/?uri=spotify%3Atrack%3A1IfFphfaKhVd4h6woepFpV" width="100%"
-                        height="100" frameborder="0" allowtransparency="true"></iframe>
-            </div>
         </div>
-    </div>
+        </div>
+    </header>
 @endsection

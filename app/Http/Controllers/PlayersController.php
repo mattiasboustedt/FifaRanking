@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Game;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,8 +101,11 @@ class PlayersController extends Controller
 
     public function profile()
     {
-        $user = Auth::User();
-        return view('players/profile', compact('user'));
+        $user = Auth::user();
+        $games = Game::where('user_a_id', $user->id)->orWhere('user_b_id', $user->id)->get();
+
+        return view('players/profile', compact('user', 'games'));
+
     }
 
     public function updateAvatar(Request $request)
