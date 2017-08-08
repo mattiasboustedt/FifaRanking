@@ -4,12 +4,11 @@
     <header id="top" class="header">
         <div class="text-vertical-center">
             <div class="col-md-4 col-md-offset-4">
-
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1 text-center text-uppercase">
-                                <h3 class="text-muted text-left">Register</h3>
+                                <h3 class="text-muted text-left fifa-font">Register</h3>
                             </div>
                         </div>
 
@@ -98,7 +97,7 @@
                         </form>
                     </div>
                     <div class="panel-footer">
-                        <a href="/login" class="">Login</a>
+                        <a href="/login" class="">Back to Login</a>
                     </div>
                 </div>
             </div>

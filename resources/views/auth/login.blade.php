@@ -5,8 +5,19 @@
         <div class="text-vertical-center">
             <div class="col-md-4 col-md-offset-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Login</div>
                     <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1 text-center text-uppercase">
+                                <h3 class="text-muted text-left fifa-font">Login</h3>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <p class="text-muted text-italic text-justify text-center">Please login using your credentials.</p>
+                            </div>
+                        </div>
+
 
                         <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
@@ -60,10 +71,6 @@
                     </div>
                     <div class="panel-footer">
                         <a href="/register" class="">Register</a>
-
-                        <a href="{{ route('password.request') }}">
-                            Forgot Your Password?
-                        </a>
                     </div>
                 </div>
             </div>

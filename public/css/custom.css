@@ -6,6 +6,16 @@ label {
     color: #777;
 }
 
+/* Fonts */
+@font-face {
+    font-family:"EASPORTS15";
+    src: url("../fonts/EASPORTS15.ttf") /* TTF file for CSS3 browsers */
+}
+
+.fifa-font {
+    font-family: EASPORTS15;
+}
+
 /* Header */
 
 .header {

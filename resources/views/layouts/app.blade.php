@@ -60,12 +60,12 @@
                     @else
                         <li class="dropdown">
 
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            <a href="#" class="dropdown-toggle fifa-font" data-toggle="dropdown" role="button"
                                aria-expanded="false">
                                 <img class="text-center img-circle"
                                      style="max-height: 32px; max-width:32px; margin-right: 5px"
                                      src="/uploads/avatars/{{ Auth::user()->avatar }}">
-                                {{ Auth::user()->name }} <span></span>
+                                {{ Auth::user()->name }}
                             </a>
 
                             <ul class="dropdown-menu" role="menu">

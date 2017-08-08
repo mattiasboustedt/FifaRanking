@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Game;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Validator;
 
 
@@ -52,8 +53,8 @@ class GamesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'player_one_id' => 'required',
-            'player_two_id' => 'required',
+            'player_one_id' => ['required', Rule::notIn($request['player_two_id'])],
+            'player_two_id' => ['required', Rule::notIn($request['player_one_id'])],
             'player_one_score' => 'required',
             'player_two_score' => 'required',
         ]);

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ $user->name }}</div>
+                    <div class="panel-heading fifa-font">{{ $user->name }}</div>
                     <div class="panel-body">
                         <div class="text-center">
                             <img class="text-center img-rounded" style="max-height: 150px; max-width:150px;"
