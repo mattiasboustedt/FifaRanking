@@ -1,12 +1,5 @@
 <?php
 
-/*if (!defined('RDS_HOSTNAME')) {
-    define('RDS_HOSTNAME', $_SERVER['RDS_HOSTNAME']);
-    define('RDS_USERNAME', $_SERVER['RDS_USERNAME']);
-    define('RDS_PASSWORD', $_SERVER['RDS_PASSWORD']);
-    define('RDS_DB_NAME', $_SERVER['RDS_DB_NAME']);
-}*/
-
 return [
 
     /*
@@ -60,20 +53,6 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-
-        /*'mysql' => [
-            'driver' => 'mysql',
-            'host' => RDS_HOSTNAME,
-            'database' => RDS_DB_NAME,
-            'username' => RDS_USERNAME,
-            'password' => RDS_PASSWORD,
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'strict' => true,
-            'engine' => null,
-        ],*/
 
         'pgsql' => [
             'driver' => 'pgsql',
