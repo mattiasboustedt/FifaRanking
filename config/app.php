@@ -179,6 +179,11 @@ return [
 
         Intervention\Image\ImageServiceProvider::class,
 
+        /*
+         * AWS
+         */
+        Aws\Laravel\AwsServiceProvider::class,
+
     ],
 
     /*
@@ -228,7 +233,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'AWS' => Aws\Laravel\AwsFacade::class,
     ],
 
 ];

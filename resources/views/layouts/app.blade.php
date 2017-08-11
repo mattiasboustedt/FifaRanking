@@ -64,7 +64,7 @@
                                aria-expanded="false">
                                 <img class="text-center img-circle"
                                      style="max-height: 32px; max-width:32px; margin-right: 5px"
-                                     src="/uploads/avatars/{{ Auth::user()->avatar }}">
+                                     src="{{ Auth::user()->avatar }}">
                                 {{ Auth::user()->name }}
                             </a>
 

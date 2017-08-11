@@ -15,6 +15,8 @@ $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
 
+$app->register(Aws\Laravel\AwsServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces

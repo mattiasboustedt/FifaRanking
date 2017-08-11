@@ -9,7 +9,7 @@
                     <div class="panel-body">
                         <div class="text-center">
                             <img class="text-center img-rounded" style="max-height: 150px; max-width:150px;"
-                                 src="/uploads/avatars/{{ $user->avatar }}">
+                                 src="{{ $user->avatar }}">
                             <hr>
                             <h3>{{ $user->name }}</h3>
                             <h4>{{ $user->username }}</h4>
@@ -70,13 +70,13 @@
                                 <tr>
                                     <td><a href="/players/{{ $game->userA->id }}"><img class="text-center img-circle"
                                                                                        style="max-height: 22px; max-width:22px; margin-right: 5px"
-                                                                                       src="/uploads/avatars/{{ $game->userA->avatar }}">{{ $game->userA->name }}
+                                                                                       src="{{ $game->userA->avatar }}">{{ $game->userA->name }}
                                         </a>({{ $game->user_a_rating_change }})
                                     </td>
                                     <td>{{ $game->user_a_score }}</td>
                                     <td><a href="/players/{{ $game->userB->id }}"><img class="text-center img-circle"
                                                                                        style="max-height: 22px; max-width:22px; margin-right: 5px"
-                                                                                       src="/uploads/avatars/{{ $game->userB->avatar }}">{{ $game->userB->name }}
+                                                                                       src="{{ $game->userB->avatar }}">{{ $game->userB->name }}
                                         </a>({{ $game->user_b_rating_change }})
                                     </td>
                                     <td>{{ $game->user_b_score }}</td>

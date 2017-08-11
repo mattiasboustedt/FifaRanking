@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\User;
+use Aws\S3\Exception\S3Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Image;
 use Symfony\Component\HttpKernel\Client;
@@ -118,15 +120,29 @@ class PlayersController extends Controller
 
             $avatar = $request->file('avatar');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
-            Image::make($avatar)->resize(150, 150)->save(public_path('/uploads/avatars/' . $filename));
+            //Image::make($avatar)->resize(150, 150)->save(public_path('/uploads/avatars/' . $filename));
 
-            $user = Auth::user();
-            $user->avatar = $filename;
-            $user->save();
+            try {
+                $s3 = App::make('aws')->createClient('s3');
+                $s3->putObject(array(
+                    'Bucket'     => env('AWS_S3_BUCKET'),
+                    'Key'        => 'avatars/' . $filename,
+                    'SourceFile' => $avatar,
+                    'ACL'          => 'public-read',
+                    'StorageClass' => 'REDUCED_REDUNDANCY'
+                ));
+
+                $user = Auth::user();
+                $user->avatar = env('AWS_S3_URL_AVATARS') . $filename;
+                $user->save();
+
+            }catch(S3Exception $e) {
+
+            }
+
         }
 
         return redirect()->action('PlayersController@profile');
-        //return view('players/profile', compact('user'));
     }
 
 }
