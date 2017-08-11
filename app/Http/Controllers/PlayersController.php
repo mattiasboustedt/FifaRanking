@@ -23,6 +23,7 @@ class PlayersController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +49,7 @@ class PlayersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -59,7 +60,7 @@ class PlayersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -74,7 +75,7 @@ class PlayersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -85,8 +86,8 @@ class PlayersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -97,7 +98,7 @@ class PlayersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
@@ -116,33 +117,60 @@ class PlayersController extends Controller
 
     public function updateAvatar(Request $request)
     {
-        if($request->hasFile('avatar')) {
+        if ($request->hasFile('avatar')) {
+
+            $user = Auth::user();
+            $oldAvatar = $user->avatar;
 
             $avatar = $request->file('avatar');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
-            //Image::make($avatar)->resize(150, 150)->save(public_path('/uploads/avatars/' . $filename));
 
-            try {
-                $s3 = App::make('aws')->createClient('s3');
-                $s3->putObject(array(
-                    'Bucket'     => env('AWS_S3_BUCKET'),
-                    'Key'        => 'avatars/' . $filename,
-                    'SourceFile' => $avatar,
-                    'ACL'          => 'public-read',
-                    'StorageClass' => 'REDUCED_REDUNDANCY'
-                ));
+            $this->uploadAvatarToS3($user, $filename, $avatar);
 
-                $user = Auth::user();
-                $user->avatar = env('AWS_S3_URL_AVATARS') . $filename;
-                $user->save();
-
-            }catch(S3Exception $e) {
-
+            if (basename($oldAvatar) != 'default.jpg') {
+                $this->deleteOldAvatar($oldAvatar);
             }
-
         }
 
         return redirect()->action('PlayersController@profile');
+    }
+
+    protected function uploadAvatarToS3($user, $filename, $avatar)
+    {
+
+        try {
+            $s3 = App::make('aws')->createClient('s3');
+            $s3->putObject(array(
+                'Bucket' => env('AWS_S3_BUCKET'),
+                'Key' => 'avatars/' . $filename,
+                'SourceFile' => $avatar,
+                'ACL' => 'public-read',
+                'StorageClass' => 'REDUCED_REDUNDANCY'
+            ));
+
+            $user->avatar = env('AWS_S3_URL_AVATARS') . $filename;
+            $user->save();
+
+        } catch (\Exception $e) {
+
+        }
+
+    }
+
+    protected function deleteOldAvatar($oldAvatarUrl)
+    {
+        $filename = basename($oldAvatarUrl);
+        $s3 = App::make('aws')->createClient('s3');
+
+        try {
+            $s3->deleteObject(array(
+                'Bucket' => env('AWS_S3_BUCKET'),
+                'Key' => 'avatars/' . $filename
+            ));
+        } catch (\Exception $e) {
+
+        }
+
     }
 
 }
