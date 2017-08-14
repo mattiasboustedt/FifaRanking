@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Rating;
+use App\Role;
 use App\Statistic;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -81,6 +82,10 @@ class RegisterController extends Controller
         $statistics = Statistic::create([
             'user_id' => $user_id
         ]);
+
+        $user
+            ->roles()
+            ->attach(Role::where('name', 'user')->first());
 
         return $user;
     }
