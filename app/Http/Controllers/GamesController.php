@@ -201,14 +201,19 @@ class GamesController extends Controller
 
         if($player_one_rating_change >= 0) {
             $player_one_rating->rating -= $player_one_rating_change;
+            $player_one_rating->rating_change = -1 * $player_one_rating_change;
         } else {
             $player_one_rating->rating += abs($player_one_rating_change);
+            $player_one_rating->rating_change = abs($player_one_rating_change);
         }
 
         if($player_two_rating_change >= 0) {
             $player_two_rating->rating -= $player_two_rating_change;
+            $player_two_rating->rating_change = -1 * $player_two_rating_change;
+
         } else {
             $player_two_rating->rating += abs($player_two_rating_change);
+            $player_two_rating->rating_change = abs($player_two_rating_change);
         }
 
         return [$player_one_rating, $player_two_rating];
