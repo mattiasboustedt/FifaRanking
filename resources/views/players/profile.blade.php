@@ -58,8 +58,7 @@
                             <tr>
                                 <td>{{ $user->rating->rating }}</td>
                                 <td>{{ $user->rating->rating_change }}</td>
-                                <td><img class="text-center img-circle"
-                                         style="max-height: 22px; max-width:22px; margin-right: 5px"
+                                <td><img class="text-center img-circle small-img"
                                          src="{{ $user->avatar }}">{{ $user->name }}
                                 </td>
                                 <td>{{ $user->statistics->played_games }}</td>

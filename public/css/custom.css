@@ -59,3 +59,11 @@ body {
     background-color: white;
     opacity: .7;
 }
+
+.small-img {
+    max-width: 22px;
+    max-height: 22px;
+    width:22px;
+    height:22px;
+    margin-right: 3px;
+}

@@ -27,8 +27,7 @@
                                 <tr>
                                     <td>{{ $player->rating->rating }}</td>
                                     <td>{{ $player->rating->rating_change }}</td>
-                                    <td><a href="/players/{{ $player->id }}"><img class="text-center img-circle"
-                                                                                  style="max-height: 22px; max-width:22px; margin-right: 3px"
+                                    <td><a href="/players/{{ $player->id }}"><img class="text-center img-circle small-img"
                                                                                   src="{{ $player->avatar }}">{{ $player->name }}
                                         </a></td>
                                     <td>{{ $player->statistics->played_games }}</td>
