@@ -39,8 +39,7 @@
                             <tr>
                                 <td>{{ $user->rating->rating }}</td>
                                 <td>{{ $user->rating->rating_change }}</td>
-                                <td><img class="text-center img-circle"
-                                         style="max-height: 22px; max-width:22px; margin-right: 5px"
+                                <td><img class="text-center img-circle small-img"
                                          src="{{ $user->avatar }}">{{ $user->name }}
                                 </td>
                                 <td>{{ $user->statistics->played_games }}</td>
@@ -71,14 +70,12 @@
                             <tbody>
                             @foreach ($games as $game)
                                 <tr>
-                                    <td><a href="/players/{{ $game->userA->id }}"><img class="text-center img-circle"
-                                                                                       style="max-height: 22px; max-width:22px; margin-right: 5px"
+                                    <td><a href="/players/{{ $game->userA->id }}"><img class="text-center img-circle small-img"
                                                                                        src="{{ $game->userA->avatar }}">{{ $game->userA->name }}
                                         </a>({{ $game->user_a_rating_change }})
                                     </td>
                                     <td>{{ $game->user_a_score }}</td>
-                                    <td><a href="/players/{{ $game->userB->id }}"><img class="text-center img-circle"
-                                                                                       style="max-height: 22px; max-width:22px; margin-right: 5px"
+                                    <td><a href="/players/{{ $game->userB->id }}"><img class="text-center img-circle small-img"
                                                                                        src="{{ $game->userB->avatar }}">{{ $game->userB->name }}
                                         </a>({{ $game->user_b_rating_change }})
                                     </td>
