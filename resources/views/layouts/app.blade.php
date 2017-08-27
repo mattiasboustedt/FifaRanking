@@ -48,6 +48,8 @@
                         <li><a href="/" class="header-margin-top">Dashboard</a></li>
                         <li><a href="/games" class="header-margin-top">Games</a></li>
                         <li><a href="/players" class="header-margin-top">Players</a></li>
+                        <li><a href="/news" class="header-margin-top">News</a></li>
+
                     @endif
                 </ul>
 

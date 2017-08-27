@@ -25,6 +25,7 @@ Route::post('/players/profile', 'PlayersController@updateAvatar');
 Route::resource('statistics', 'StatisticsController');
 Route::resource('games', 'GamesController');
 Route::resource('players', 'PlayersController');
+Route::resource('news', 'NewsController');
 
 
 //Route::post('/games', 'GamesController@store');

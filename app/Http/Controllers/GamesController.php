@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Game;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Validator;
 
@@ -156,9 +157,98 @@ class GamesController extends Controller
      * @param  \App\Game $game
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Game $game)
+    public function destroy($id)
     {
-        //
+        // Add handling for exception in handler.php function render
+        $game = Game::findOrFail($id);
+
+        try {
+            $this->deleteGame($game);
+        } catch(\Exception $e) {
+            return redirect('/games')->withErrors(array('errors' => $e));
+        }
+
+        Session::flash('message', "Game was deleted successfully.");
+        return redirect('/games');
+    }
+
+    protected function deleteGame(Game $game)
+    {
+        // Roll back player ratings
+        $ratings = $this->rollBackRating($game);
+        // Roll back player statistics
+        $statistics = $this->rollBackStatistics($game);
+        // Delete the game
+        $game->delete();
+
+        // If everything is good so far, save new ratings and statistics.
+        $ratings[0]->save();
+        $ratings[1]->save();
+
+        $statistics[0]->save();
+        $statistics[1]->save();
+
+    }
+
+    protected function rollBackRating(Game $game)
+    {
+        $player_one_rating = $game->userA->rating;
+        $player_two_rating = $game->userB->rating;
+
+        $player_one_rating_change = $game->user_a_rating_change;
+        $player_two_rating_change = $game->user_b_rating_change;
+
+
+        if($player_one_rating_change >= 0) {
+            $player_one_rating->rating -= $player_one_rating_change;
+        } else {
+            $player_one_rating->rating += abs($player_one_rating_change);
+        }
+
+        if($player_two_rating_change >= 0) {
+            $player_two_rating->rating -= $player_two_rating_change;
+        } else {
+            $player_two_rating->rating += abs($player_two_rating_change);
+        }
+
+        return [$player_one_rating, $player_two_rating];
+    }
+
+    protected function rollBackStatistics(Game $game)
+    {
+        $player_one_statistics = $game->userA->statistics;
+        $player_two_statistics = $game->userB->statistics;
+
+        //Update player one
+        $player_one_statistics->played_games --;
+        $player_one_statistics->goals_scored -= $game->user_a_score;
+        $player_one_statistics->goals_against -= $game->user_b_score;
+        $player_one_statistics->goal_difference = $player_one_statistics->goals_scored - $player_one_statistics->goals_against;
+
+        if($game->user_a_score > $game->user_b_score) {
+            $player_one_statistics->games_won --;
+        } else if ($game->user_a_score < $game->user_b_score) {
+            $player_one_statistics->games_lost --;
+        } else {
+            $player_one_statistics->games_drawn --;
+        }
+
+        //Update player two
+        $player_two_statistics->played_games --;
+        $player_two_statistics->goals_scored -= $game->user_b_score;
+        $player_two_statistics->goals_against -= $game->user_a_score;
+        $player_two_statistics->goal_difference = $player_two_statistics->goals_scored - $player_two_statistics->goals_against;
+
+        if($game->user_a_score > $game->user_b_score) {
+            $player_two_statistics->games_lost --;
+        } else if ($game->user_a_score < $game->user_b_score) {
+            $player_two_statistics->games_won --;
+        } else {
+            $player_two_statistics->games_drawn --;
+        }
+
+        return [$player_one_statistics, $player_two_statistics];
+
     }
 
     protected function calculateNewRating($player_one_rating, $player_two_rating, $player_one_score, $player_two_score)

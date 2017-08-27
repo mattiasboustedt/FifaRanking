@@ -7,6 +7,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading fifa-font">Games</div>
                     <div class="panel-body">
+                        @if(Session::has('message'))
+                            <p class="alert alert-info text-muted">{{ Session::get('message') }}</p>
+                        @endif
                         <table class="table table-striped text-muted" id="games_table">
                             <thead>
                             <tr>
@@ -15,6 +18,10 @@
                                 <th>P2 : Rating +/-</th>
                                 <th>P2 Score</th>
                                 <th>Date</th>
+                                @if(Auth::user()->hasRole('admin'))
+                                    <th></th>
+                                @endif
+
                             </tr>
                             </thead>
                             <tbody>
@@ -33,6 +40,15 @@
                                     </td>
                                     <td>{{ $game->user_b_score }}</td>
                                     <td>{{ $game->created_at }}</td>
+                                    @if(Auth::user()->hasRole('admin'))
+                                        <td>
+                                            <form class="delete" method="POST" action="{{ route('games.destroy', [$game->id]) }}">
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <button type="submit" class="">Delete</button>
+                                            </form>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>
@@ -49,5 +65,10 @@
                 "order": [[4, "desc"]]
             });
         });
+
+        $(".delete").on("submit", function(){
+            return confirm("Do you want to delete this game? This can not be undone.");
+        });
+
     </script>
 @endsection

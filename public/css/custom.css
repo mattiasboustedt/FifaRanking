@@ -2,6 +2,10 @@
     margin-top: 2%;
 }
 
+.text-bold {
+    font-weight: 900;
+}
+
 label {
     color: #777;
 }
