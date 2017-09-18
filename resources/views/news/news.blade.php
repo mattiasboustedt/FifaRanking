@@ -9,12 +9,15 @@
                     <div class="panel-body">
                         <h4 class="text-bold">General Information</h4>
                         <p>For improvements, suggestions, bug reports, or anything else. Please contact <a href="mailto:{{ $email }}">{{ $name }}.</a></p>
-                        <h5>Upcoming changes:</h5>
-                        <ol>
-                            <li>Edit your profile</li>
-                            <li>User administration</li>
-                        </ol>
-                        <p class="text-bold">PS. Would love some help with improving the GUI!</p>
+                        <hr>
+
+                        <h4 class="text-bold">Beta V1.03 - Released</h4>
+                        <ul>
+                            <li>Display Top 10 players instead of Top 5 on the landing page.</li>
+                            <li>Only players with 10 or more games will be displayed in the Top 10 players list.</li>
+                            <li>Display 10 last games instead of only 5 on the landing page.</li>
+                        </ul>
+
                         <hr>
 
                         <h4 class="text-bold">Beta V1.02 - Released</h4>
