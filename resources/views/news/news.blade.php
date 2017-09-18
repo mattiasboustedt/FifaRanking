@@ -15,7 +15,6 @@
                         <ul>
                             <li>Display Top 10 players instead of Top 5 on the landing page.</li>
                             <li>Only players with 10 or more games will be displayed in the Top 10 players list.</li>
-                            <li>Display 10 last games instead of only 5 on the landing page.</li>
                         </ul>
 
                         <hr>

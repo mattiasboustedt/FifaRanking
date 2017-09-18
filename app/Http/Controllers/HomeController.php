@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Game;
+use App\Rating;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::all();
-        $games = Game::orderBy('created_at', 'desc')->take(10)->get();
+        $games = Game::orderBy('created_at', 'desc')->take(5)->get();
         $ratings = array();
 
         //Only include player ratings with 10 played games or more.
@@ -38,7 +39,12 @@ class HomeController extends Controller
                 }
         }
 
-        // Still faster to do a slice after, but this should be done in a better way.
+        //Sort array based on rating, descending.
+        usort($ratings, function($a, $b) {
+            return $b->rating - $a->rating;
+        });
+
+        //Slice the array, only include top 10.
         $ratings = array_slice($ratings, 0 , 10, true);
 
         return view('home', compact('games', 'ratings', 'users'));
