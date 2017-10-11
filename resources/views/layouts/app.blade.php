@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <!-- Scripts -->
@@ -48,9 +49,10 @@
                         <li><a href="/" class="header-margin-top">Dashboard</a></li>
                         <li><a href="/games" class="header-margin-top">Games</a></li>
                         <li><a href="/players" class="header-margin-top">Players</a></li>
-                        <li><a href="/news" class="header-margin-top">News</a></li>
-
                     @endif
+                    @if(Auth::user()->hasRole('admin'))
+                            <li><a href="/administration" class="header-margin-top">Administration</a></li>
+                        @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

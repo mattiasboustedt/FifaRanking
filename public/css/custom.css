@@ -67,3 +67,7 @@ body {
     height:22px;
     margin-right: 3px;
 }
+
+.golden {
+    color: goldenrod !important;
+}

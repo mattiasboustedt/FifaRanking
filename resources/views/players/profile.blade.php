@@ -35,6 +35,34 @@
                             </div>
                         </div>
 
+                        @if(count($user->hasHallOfFame) > 0 )
+                            <hr>
+
+                            <h3>Titles</h3>
+
+                            <table class="table table-striped text-muted" id="hall_of_fame_table">
+                                <thead>
+                                <tr>
+                                    <th>Player</th>
+                                    <th>Title</th>
+                                    <th>Date Achieved</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($user->hasHallOfFame as $hof)
+                                    <tr>
+                                        <td><i class="fa fa-trophy golden" aria-hidden="false"></i>
+                                            <a href="/players/{{ $hof->user->id }}"> <img class="text-center img-circle small-img"
+                                                                                          src="{{ $hof->user->avatar }}">{{ $hof->user->name }}
+                                            </a><i class="fa fa-trophy golden" aria-hidden="false"></td>
+                                        <td>{{ $hof->title }}</td>
+                                        <td>{{ $hof->date }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        @endif
+
                         <hr>
 
                         <h3>Statistics</h3>

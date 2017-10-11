@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Game;
 use App\Rating;
 use App\User;
+use App\HallOfFame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -29,6 +30,7 @@ class HomeController extends Controller
     {
         $users = User::all();
         $games = Game::orderBy('created_at', 'desc')->take(5)->get();
+        $hall_of_fame = HallOfFame::all();
         $ratings = array();
 
         //Only include player ratings with 10 played games or more.
@@ -47,6 +49,6 @@ class HomeController extends Controller
         //Slice the array, only include top 10.
         $ratings = array_slice($ratings, 0 , 10, true);
 
-        return view('home', compact('games', 'ratings', 'users'));
+        return view('home', compact('games', 'ratings', 'users', 'hall_of_fame'));
     }
 }

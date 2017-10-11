@@ -26,6 +26,7 @@ Route::resource('statistics', 'StatisticsController');
 Route::resource('games', 'GamesController');
 Route::resource('players', 'PlayersController');
 Route::resource('news', 'NewsController');
+Route::resource('administration', 'AdministrationController');
 
 
 //Route::post('/games', 'GamesController@store');

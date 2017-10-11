@@ -7,6 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading fifa-font">Home</div>
                     <div class="panel-body">
+                        <p class="fifa-font">Register Game</p>
 
                         <form class="form-horizontal" method="POST" action="{{ route('games.store') }}">
                             {{ csrf_field() }}
@@ -81,8 +82,35 @@
 
                         </form>
 
+                        @if(count($hall_of_fame) > 0 )
                         <hr>
+                        <p class="fifa-font">Hall of Fame</p>
 
+                        <table class="table table-striped text-muted" id="hall_of_fame_table">
+                            <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th>Title</th>
+                                <th>Date Achieved</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($hall_of_fame as $hof)
+                                <tr>
+                                    <td><i class="fa fa-trophy golden" aria-hidden="false"></i>
+                                        <a href="/players/{{ $hof->user->id }}"> <img class="text-center img-circle small-img"
+                                                                                         src="{{ $hof->user->avatar }}">{{ $hof->user->name }}
+                                        </a><i class="fa fa-trophy golden" aria-hidden="false"></td>
+                                    <td>{{ $hof->title }}</td>
+                                    <td>{{ $hof->date }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        @endif
+
+                        <hr>
+                        <p class="fifa-font">Top Players</p>
 
                         <table class="table table-striped text-muted">
                             <thead>
@@ -120,7 +148,7 @@
                         </table>
 
                         <hr>
-
+                        <p class="fifa-font">Latest Games</p>
                         <table class="table table-striped text-muted">
                             <thead>
                             <tr>
@@ -154,4 +182,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#hall_of_fame_table').DataTable({
+                "order": [[2, "asc"]]
+            });
+        });
+
+    </script>
 @endsection
