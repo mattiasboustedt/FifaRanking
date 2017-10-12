@@ -15,7 +15,7 @@
                             <h4>{{ $user->username }}</h4>
                             <h5>{{ $user->email }}</h5>
                         </div>
-                        
+
                         @if(count($user->hasHallOfFame) > 0 )
                             <hr>
 

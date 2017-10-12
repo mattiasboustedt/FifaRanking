@@ -182,13 +182,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function () {
-            $('#hall_of_fame_table').DataTable({
-                "order": [[2, "asc"]]
-            });
-        });
-
-    </script>
 @endsection
